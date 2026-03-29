@@ -21,9 +21,9 @@ Escolha a versão compatível com o seu sistema operacional. Não é necessário
 | Sistema Operacional | Arquitetura | Download |
 | :--- | :--- | :--- |
 | **Windows** | x64 (64-bit) | [**Baixar .exe**](https://github.com/chiliexe/MasterYoutubeDownloader/releases/latest) |
-| **Linux** | x64 (64-bit) | [**Baixar Binário**](https://github.com/chiliexe/MasterYoutubeDownloader/releases/latest) |
-| **macOS** | Intel x64 | [**Baixar Binário**](https://github.com/chiliexe/MasterYoutubeDownloader/releases/latest) |
-| **macOS** | Apple Silicon (M1/M2/M3) | [**Baixar Binário**](https://github.com/chiliexe/MasterYoutubeDownloader/releases/latest) |
+| **Linux** | x64 (64-bit) | [**Baixar Binário**](https://github.com/chiliexe/MasterYoutubeDownloader/releases/tag/Linux-x64) |
+| **macOS** | Intel x64 | [**Baixar Binário**](https://github.com/chiliexe/MasterYoutubeDownloader/releases/tag/MacOS-Intel-x64) |
+| **macOS** | Apple Silicon (M1/M2/M3) | [**Baixar Binário**](https://github.com/chiliexe/MasterYoutubeDownloader/releases/tag/MacOS-Arm-x64) |
 
 > **Nota para Linux/Mac:** Após baixar, lembre-se de dar permissão de execução ao arquivo com o comando `chmod +x nome-do-arquivo` no terminal.
 
