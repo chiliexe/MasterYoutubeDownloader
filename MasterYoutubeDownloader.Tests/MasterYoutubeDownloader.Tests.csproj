@@ -18,4 +18,8 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MasterYoutubeDownloader.App\MasterYoutubeDownloader.App.csproj" />
+  </ItemGroup>
+
 </Project>
