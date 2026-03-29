@@ -5,6 +5,18 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <Title>Master Youtube Downloader</Title>
+    <Authors>Chiliexe</Authors>
+    <Company>Chiliexe Software</Company>
+    <Product>Master Youtube Downloader</Product>
+    <Description>Downloader de alta performance para vídeos e playlists do YouTube.</Description>
+    <Copyright>Copyright © 2026 Chiliexe</Copyright>
+    <PackageProjectUrl>https://github.com/chiliexe/MasterYoutubeDownloader</PackageProjectUrl>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <ApplicationIcon>masteryt.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

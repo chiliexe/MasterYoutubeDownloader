@@ -26,7 +26,6 @@ Escolha a versão compatível com o seu sistema operacional. Não é necessário
 | **macOS** | Apple Silicon (M1/M2/M3) | [**Baixar Binário**](https://github.com/chiliexe/MasterYoutubeDownloader/releases/latest) |
 
 > **Nota para Linux/Mac:** Após baixar, lembre-se de dar permissão de execução ao arquivo com o comando `chmod +x nome-do-arquivo` no terminal.
-- 
 
 ---
 
