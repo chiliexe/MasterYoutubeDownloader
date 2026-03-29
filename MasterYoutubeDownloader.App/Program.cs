@@ -50,7 +50,7 @@ internal class Program
                     await StartVideoFlow(isAudio: true);
                     break;
                 case " -> Sobre o Projeto ❤":
-                    AnsiConsole.MarkupLine("'Sobre' em breve...");// ShowAbout();
+                    ShowAbout();
                     break;
             }
 
@@ -60,7 +60,35 @@ internal class Program
     }
     private static void ShowAbout()
     {
-        
+        AnsiConsole.Clear();
+        DrawHeader();
+
+        var table = new Table().Border(TableBorder.Rounded).BorderColor(Color.Grey);
+
+        table.AddColumn("[yellow]Informação[/]");
+        table.AddColumn("[yellow]Detalhes[/]");
+
+        table.AddRow("Projeto", "[bold cyan1]Master Youtube Downloader[/]");
+        table.AddRow("Versão", "1.0.0");
+        table.AddRow("Desenvolvedor", "Chiliexe");
+        table.AddRow("Linguagem", "C# / .NET 8.0");
+        table.AddRow("Licença", "[green]MIT License[/]");
+        table.AddRow("Repositório", "[link]https://github.com/chiliexe/MasterYoutubeDownloader[/]");
+
+        var aboutPanel = new Panel(
+            new Rows(
+                table,
+                new Padder(new Markup("\nEste projeto foi desenvolvido com foco em [bold]performance[/] e [bold]portabilidade[/]. " +
+                                      "O objetivo é fornecer uma interface CLI moderna para manipulação de mídias do YouTube " +
+                                      "de forma simples e eficiente."), new Padding(1, 1, 1, 1))
+            )
+        );
+
+        aboutPanel.Header = new PanelHeader("[bold magenta] SOBRE O PROJETO [/]");
+        aboutPanel.Padding = new Padding(2, 1, 2, 1);
+        aboutPanel.Expand = true;
+
+        AnsiConsole.Write(aboutPanel);
     }
     private static void DrawHeader()
     {
@@ -80,8 +108,8 @@ internal class Program
         headerGrid.AddRow(
             new Padder(
                 Align.Center(
-                    new Markup(
-                        "[grey] By Chiliexe | v1.0.0 | Github: [/][link=https://github.com]master-downloader[/] [green]✔[/]")
+                    new Markup( 
+                        "[grey] By Chiliexe | v1.0.0 | Github: [/][link=https://github.com/chiliexe/MasterYoutubeDownloader]master-downloader[/] [green]✔[/]")
                     ),
                 new Padding(0, 0, 0, 1)
             )
@@ -89,15 +117,15 @@ internal class Program
 
         AnsiConsole.Write(headerGrid);
 
-        // 5. Espaço de Input Estilizado
+        
         AnsiConsole.Write(new Rule("[yellow]ENTRADA DE DADOS[/]").RuleStyle("grey"));
         AnsiConsole.WriteLine();
     }
 
     private static async Task StartVideoFlow(bool isAudio)
     {
-        string promptText = !isAudio ? 
-            "[white]➜[/] Digite a [bold cyan]URL[/] do Vídeo ou Playlist:" : 
+        string promptText = !isAudio ?
+            "[white]➜[/] Digite a [bold cyan]URL[/] do Vídeo ou Playlist:" :
             "[white]➜[/] Digite a [bold cyan]URL[/] da Musica (Vídeo ou Playlist):";
         var url = AnsiConsole.Prompt(
             new TextPrompt<string>(promptText)
@@ -116,7 +144,8 @@ internal class Program
                     await StartPlayListOption(url, FileType.Video); break;
             }
 
-        }else // audio flow
+        }
+        else // audio flow
         {
             switch (urlType)
             {
@@ -138,7 +167,7 @@ internal class Program
         AnsiConsole.MarkupLine($"[yellow][[Info]][/] Título: {video.Title} ");
         AnsiConsole.MarkupLine($"[yellow][[Info]][/] Duração: {video.Duration} ");
 
-        if(fileType is FileType.Video)
+        if (fileType is FileType.Video)
         {
             var result = await AnsiConsole.PromptAsync(
             new SelectionPrompt<string>()
@@ -149,7 +178,8 @@ internal class Program
                 await ytdlp.DownloadVideo(url, fileType, VideoResolution.HD);
             else
                 await ytdlp.DownloadVideo(url, fileType, VideoResolution.FullHD);
-        } else
+        }
+        else
         {
             await ytdlp.DownloadVideo(url, fileType);
         }
@@ -165,7 +195,7 @@ internal class Program
         options.AddRange(videoList.Select((v, i) => $"#{i + 1:00} - {(v.Title.Length > 60 ? v.Title[..60] + "..." : v.Title)}"));
 
         var choiceMenu = AnsiConsole.Prompt(new SelectionPrompt<string>().Title("Listando Toda a Playlist:").PageSize(15).AddChoices(options));
-        if(fileType is FileType.Video)
+        if (fileType is FileType.Video)
         {
             var resMenu = AnsiConsole.Prompt(new SelectionPrompt<string>().Title("Selecione a Resolução Desejada:").AddChoices("720p ( HD )", "1080p ( FULL HD )"));
             var res = resMenu == "720p ( HD )" ? VideoResolution.HD : VideoResolution.FullHD;
@@ -174,22 +204,23 @@ internal class Program
             {
                 await ytdlp.DownloadPlaylist(url, fileType, res);
             }
-            else 
+            else
             {
                 var index = int.Parse(choiceMenu[1..3]) - 1;
-                var cleanUrl = videoList[index].Url.Split('&')[0]; 
+                var cleanUrl = videoList[index].Url.Split('&')[0];
                 await ytdlp.DownloadVideo(cleanUrl, fileType, res);
             }
-        }else
+        }
+        else
         {
             if (choiceMenu == options[0])
             {
                 await ytdlp.DownloadPlaylist(url, fileType);
             }
-            else 
+            else
             {
                 var index = int.Parse(choiceMenu[1..3]) - 1;
-                var cleanUrl = videoList[index].Url.Split('&')[0]; 
+                var cleanUrl = videoList[index].Url.Split('&')[0];
                 await ytdlp.DownloadVideo(cleanUrl, fileType);
             }
         }
@@ -198,8 +229,8 @@ internal class Program
     {
         try { return await _ytClient.Videos.GetAsync(url); }
         catch { return null; }
-    }   
-    
+    }
+
     private static async Task<List<PlaylistVideo>> GetPlaylistMetaData(string url)
     {
         using var ytClient = new YoutubeClient();
